@@ -84,7 +84,7 @@ public class GuiCustomButton extends GuiButton
 			{
 				texture.bind();
 
-				RenderUtil.drawPartialImage(this.x, this.y, 0, (k - 1) * b.imageHeight, b.width, b.height, b.imageWidth, b.imageHeight);
+				RenderUtil.drawPartialImage(this.x, this.y, 0, (k - 1) * b.imageHeight, this.width, this.height, b.imageWidth, b.imageHeight);
 			}
 			else
 			{
