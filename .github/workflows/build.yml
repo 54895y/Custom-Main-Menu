@@ -28,7 +28,9 @@ jobs:
           restore-keys: gradle-${{ runner.os }}-
 
       - name: Build
-        run: ./gradlew build -x test --no-daemon
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build -x test --no-daemon
 
       - name: Upload jar
         uses: actions/upload-artifact@v4
