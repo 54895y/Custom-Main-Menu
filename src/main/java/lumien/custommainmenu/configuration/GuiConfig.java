@@ -419,7 +419,28 @@ public class GuiConfig
 			b.textOffsetY = jsonObject.get("textOffsetY").getAsInt();
 		}
 
+		b.unit = parseUnit(jsonObject, "unit", b.unit, b.name);
+		b.posXUnit = parseUnit(jsonObject, "posXUnit", null, b.name);
+		b.posYUnit = parseUnit(jsonObject, "posYUnit", null, b.name);
+		b.widthUnit = parseUnit(jsonObject, "widthUnit", null, b.name);
+		b.heightUnit = parseUnit(jsonObject, "heightUnit", null, b.name);
+
 		return b;
+	}
+
+	private String parseUnit(JsonObject obj, String key, String fallback, String buttonName)
+	{
+		if (obj.has(key))
+		{
+			String value = obj.get(key).getAsString();
+			if ("px".equals(value) || "percent".equals(value))
+			{
+				return value;
+			}
+			CustomMainMenu.INSTANCE.logger.warn("Button '" + buttonName + "' has invalid value '" + value + "' for '" + key + "'; expected 'px' or 'percent'. Falling back to default.");
+			return fallback;
+		}
+		return fallback;
 	}
 
 	private Image getImage(JsonObject jsonObject)

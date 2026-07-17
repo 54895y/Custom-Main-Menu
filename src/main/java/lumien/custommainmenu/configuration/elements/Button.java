@@ -36,6 +36,12 @@ public class Button extends Element
 	
 	public int wrappedButtonID;
 
+	public String unit;
+	public String posXUnit;
+	public String posYUnit;
+	public String widthUnit;
+	public String heightUnit;
+
 	public Button(GuiConfig parent,IText text, int posX, int posY, int width, int height, Alignment alignment)
 	{
 		super(parent);
@@ -54,9 +60,15 @@ public class Button extends Element
 		this.action = null;
 		this.tooltip = null;
 		this.hoverText = text;
-		
+
 		this.textOffsetX = 0;
 		this.textOffsetY = 0;
+
+		this.unit = "px";
+		this.posXUnit = null;
+		this.posYUnit = null;
+		this.widthUnit = null;
+		this.heightUnit = null;
 
 		if (this.alignment == null)
 		{

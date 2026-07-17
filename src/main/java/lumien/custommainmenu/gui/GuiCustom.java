@@ -193,11 +193,58 @@ public class GuiCustom extends GuiScreen implements GuiYesNoCallback
 	{
 		if (configButton != null)
 		{
-			guiButton.x = modX(configButton.posX, configButton.alignment);
-			guiButton.y = modY(configButton.posY, configButton.alignment);
+			int resolvedX = resolvePosX(configButton);
+			int resolvedY = resolvePosY(configButton);
+			guiButton.x = modX(resolvedX, configButton.alignment);
+			guiButton.y = modY(resolvedY, configButton.alignment);
+			if (!(guiButton instanceof GuiCustomWrappedButton))
+			{
+				guiButton.width = resolveWidth(configButton);
+				guiButton.height = resolveHeight(configButton);
+			}
 		}
 
 		return guiButton;
+	}
+
+	private int resolvePosX(Button b)
+	{
+		String u = b.posXUnit != null ? b.posXUnit : b.unit;
+		if ("percent".equals(u))
+		{
+			return (int) (b.posX / 100.0 * this.width);
+		}
+		return b.posX;
+	}
+
+	private int resolvePosY(Button b)
+	{
+		String u = b.posYUnit != null ? b.posYUnit : b.unit;
+		if ("percent".equals(u))
+		{
+			return (int) (b.posY / 100.0 * this.height);
+		}
+		return b.posY;
+	}
+
+	private int resolveWidth(Button b)
+	{
+		String u = b.widthUnit != null ? b.widthUnit : b.unit;
+		if ("percent".equals(u))
+		{
+			return (int) (b.width / 100.0 * this.width);
+		}
+		return b.width;
+	}
+
+	private int resolveHeight(Button b)
+	{
+		String u = b.heightUnit != null ? b.heightUnit : b.unit;
+		if ("percent".equals(u))
+		{
+			return (int) (b.height / 100.0 * this.height);
+		}
+		return b.height;
 	}
 
 	public void confirmClicked(boolean result, int id)

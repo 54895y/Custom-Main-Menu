@@ -1,0 +1,3 @@
+### Custom Main Menu by default removes all buttons added by other mods (Open Eye, Version Checker, Tabula) due to not being able to control them like the vanilla buttons.
+
+Using Wrapped Buttons you can create buttons that mimic their functionality. For them to work you need to find out the button id of the button you want to re add, look into your latest fml client log and search for "wrapped button", all removed mod buttons are logged with their respective button id.
