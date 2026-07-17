@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Project;
@@ -115,6 +116,7 @@ public class GuiCustom extends GuiScreen implements GuiYesNoCallback
 	@Override
 	public void initGui()
 	{
+		this.buttonList.clear();
 		GlStateManager.disableTexture2D();
 		GlStateManager.enableBlend();
 		GlStateManager.disableAlpha();
@@ -201,6 +203,11 @@ public class GuiCustom extends GuiScreen implements GuiYesNoCallback
 			{
 				guiButton.width = resolveWidth(configButton);
 				guiButton.height = resolveHeight(configButton);
+			}
+
+			if ("percent".equals(configButton.unit) || "percent".equals(configButton.posXUnit) || "percent".equals(configButton.posYUnit) || "percent".equals(configButton.widthUnit) || "percent".equals(configButton.heightUnit))
+			{
+				CustomMainMenu.INSTANCE.logger.log(Level.DEBUG, "[CMM] alignButton '{}' screenW={} screenH={} -> x={} y={} w={} h={}", new Object[]{ configButton.name, this.width, this.height, guiButton.x, guiButton.y, guiButton.width, guiButton.height });
 			}
 		}
 
